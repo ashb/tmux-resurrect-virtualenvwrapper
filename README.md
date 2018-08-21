@@ -7,12 +7,8 @@ it only recognizes virtualenvwrapper environments (as it utilises the hooks
 provided by that project to get told about activation and deactivation of
 environments.)
 
-Requirements / dependencies: `tmux 1.9` or higher, `bash`, `tmux-resurrect`
-**WITH UN-MERGED PR [#267][hooks-pr]**.
-
-For this plugin to work it requires the hook support added to tmux-resurrect be
-able to save and restore the active venv state. Until that PR is merged you
-should use the `ashb/tmux-resurrect` fork in TPM.
+Requirements / dependencies: `tmux 1.9` or higher, `bash`, recent `tmux-resurrect`
+with Hook support ([PR #267][hooks-pr]).
 
 [hooks-pr]: https://github.com/tmux-plugins/tmux-resurrect/pull/267
 
