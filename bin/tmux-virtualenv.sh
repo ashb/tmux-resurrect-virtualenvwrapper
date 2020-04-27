@@ -49,17 +49,20 @@ restore_panes_virtualenv() {
 }
 
 install() {
-  [[ -n "${VIRTUALENVWRAPPER_HOOK_DIR}" ]] || {
-    echo >&2 "virtualenvwrapper environment variables not found!"
+  [[ -n "${VIRTUALENVWRAPPER_SCRIPT}" ]] || {
+    echo >&2 "virtualenvwrapper not found!"
     exit 1
   }
 
+  local hook_dir
+  hook_dir=${VIRTUALENVWRAPPER_HOOK_DIR:-$WORKON_HOME}
+
   CURRENT_DIR="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-  hook="${VIRTUALENVWRAPPER_HOOK_DIR}/predeactivate"
+  hook="${hook_dir}/predeactivate"
   cmd="tmux-virtualenv.sh deactivate-venv"
   _add_line_to_file "tmux-virtualenv.sh" "$CURRENT_DIR/$cmd" "$hook"
 
-  hook="${VIRTUALENVWRAPPER_HOOK_DIR}/preactivate"
+  hook="${hook_dir}/preactivate"
   cmd="tmux-virtualenv.sh activate-venv"
   _add_line_to_file "tmux-virtualenv.sh" "$CURRENT_DIR/$cmd \"\$1\"" "$hook"
 
